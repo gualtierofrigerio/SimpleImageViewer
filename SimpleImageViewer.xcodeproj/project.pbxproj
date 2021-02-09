@@ -20,6 +20,10 @@
 		25AF257325CD81E6003CE640 /* DropUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AF257225CD81E6003CE640 /* DropUtils.swift */; };
 		25AF257725CD87EB003CE640 /* FilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AF257625CD87EB003CE640 /* FilesViewModel.swift */; };
 		25AF257B25CD8D71003CE640 /* SingleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25AF257A25CD8D71003CE640 /* SingleImageView.swift */; };
+		25B3563325D177B900A451B6 /* MenuCommandsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B3563225D177B900A451B6 /* MenuCommandsHandler.swift */; };
+		25B3563625D17A9A00A451B6 /* MenuCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B3563525D17A9A00A451B6 /* MenuCommands.swift */; };
+		25B3563C25D185D100A451B6 /* SingleEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B3563B25D185D100A451B6 /* SingleEntryView.swift */; };
+		25B3564025D1934800A451B6 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B3563F25D1934800A451B6 /* ImageUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +43,10 @@
 		25AF257225CD81E6003CE640 /* DropUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropUtils.swift; sourceTree = "<group>"; };
 		25AF257625CD87EB003CE640 /* FilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesViewModel.swift; sourceTree = "<group>"; };
 		25AF257A25CD8D71003CE640 /* SingleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageView.swift; sourceTree = "<group>"; };
+		25B3563225D177B900A451B6 /* MenuCommandsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommandsHandler.swift; sourceTree = "<group>"; };
+		25B3563525D17A9A00A451B6 /* MenuCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCommands.swift; sourceTree = "<group>"; };
+		25B3563B25D185D100A451B6 /* SingleEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEntryView.swift; sourceTree = "<group>"; };
+		25B3563F25D1934800A451B6 /* ImageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +106,9 @@
 				25A940F125CB00A200689556 /* ContentView.swift */,
 				25AF256625CD7E64003CE640 /* FilesView.swift */,
 				25A9410325CB048700689556 /* ImageView.swift */,
+				25B3563525D17A9A00A451B6 /* MenuCommands.swift */,
 				25AF257A25CD8D71003CE640 /* SingleImageView.swift */,
+				25B3563B25D185D100A451B6 /* SingleEntryView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -109,6 +119,8 @@
 				25AF257225CD81E6003CE640 /* DropUtils.swift */,
 				25AF256F25CD801E003CE640 /* FilesystemManager.swift */,
 				25A9410725CB053C00689556 /* ImageLoader.swift */,
+				25B3563F25D1934800A451B6 /* ImageUtils.swift */,
+				25B3563225D177B900A451B6 /* MenuCommandsHandler.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -194,14 +206,18 @@
 			files = (
 				25AF257B25CD8D71003CE640 /* SingleImageView.swift in Sources */,
 				25AF257325CD81E6003CE640 /* DropUtils.swift in Sources */,
+				25B3563C25D185D100A451B6 /* SingleEntryView.swift in Sources */,
 				25A9410425CB048700689556 /* ImageView.swift in Sources */,
 				25AF256725CD7E64003CE640 /* FilesView.swift in Sources */,
 				25AF257725CD87EB003CE640 /* FilesViewModel.swift in Sources */,
+				25B3563325D177B900A451B6 /* MenuCommandsHandler.swift in Sources */,
+				25B3563625D17A9A00A451B6 /* MenuCommands.swift in Sources */,
 				25AF256A25CD7EE1003CE640 /* FileEntry.swift in Sources */,
 				25A940F225CB00A200689556 /* ContentView.swift in Sources */,
 				25A9410825CB053C00689556 /* ImageLoader.swift in Sources */,
 				25AF257025CD801E003CE640 /* FilesystemManager.swift in Sources */,
 				25A940F025CB00A200689556 /* AppDelegate.swift in Sources */,
+				25B3564025D1934800A451B6 /* ImageUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,7 +367,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gfrigerio.SimpleImageViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -375,7 +391,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gfrigerio.SimpleImageViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
