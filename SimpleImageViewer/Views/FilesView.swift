@@ -11,38 +11,25 @@ struct FilesView: View {
     @ObservedObject var viewModel:FilesViewModel
     
     var body: some View {
-        NavigationView {
-            List(viewModel.entries) { entry in
+        List(viewModel.entries) { entry in
+            if entry.isDir {
+                Button(action:{
+                        selectDirectory(entry:entry)}) {
+                    SingleEntryView(entry: entry)
+                }.buttonStyle(PlainButtonStyle())
+            }
+            else {
                 NavigationLink(
                     destination: SingleImageView(imageURL: entry.fileURL)) {
-                        SingleEntryView(entry: entry)
-                    }
+                    SingleEntryView(entry: entry)
+                }
             }
         }
         .onDrop(of: ["public.file-url"], delegate: self)
     }
-}
-
-struct SingleEntryView: View {
-    var entry:FileEntry
     
-    var body: some View {
-        if entry.isDir {
-            HStack {
-                if #available(OSX 11.0, *) {
-                    Image(systemName: "folder").font(.largeTitle)
-                } else {
-                    Text("FOLDER")
-                }
-                Text(entry.name)
-            }
-        }
-        else {
-            HStack {
-                ImageView(withURL: entry.fileURL)
-                Text(entry.name)
-            }
-        }
+    private func selectDirectory(entry:FileEntry) {
+        viewModel.setDirectory(entry.fileURL)
     }
 }
 
