@@ -7,15 +7,26 @@
 
 import Foundation
 
+/// View model for FilesView
 class FilesViewModel: ObservableObject {
     @Published var entries:[FileEntry] = []
     var supportedExtensions = ["jpg", "png", "heic"]
     
     func setDirectory(_ dir:URL) {
         guard let fileEntries = FilesystemManager.getFileEntries(forDirectory: dir) else { return }
+        var entriesToShow = fileEntries.filter(self.filterClosure).sorted(by: self.sortClosure)
+        let parentDir = getParentDir(ofDir: dir)
+        entriesToShow.insert(parentDir, at: 0)
         DispatchQueue.main.async {
-            self.entries = fileEntries.filter(self.filterClosure).sorted(by: self.sortClosure)
+            self.entries = entriesToShow
         }
+    }
+    
+    // MARK: - Private
+    
+    private func getParentDir(ofDir dir:URL) -> FileEntry {
+        let parentURL = dir.deletingLastPathComponent()
+        return FileEntry(isDir: true, fileURL: parentURL, name: "..")
     }
     
     private func filterClosure(entry:FileEntry) -> Bool {
