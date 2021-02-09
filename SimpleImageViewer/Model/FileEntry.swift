@@ -7,10 +7,11 @@
 
 import Foundation
 
+/// Describes a filesystem entry
 struct FileEntry {
-    var isDir:Bool
-    var fileURL:URL
-    var name:String
+    var isDir:Bool // true if it is a directory
+    var fileURL:URL // full path url
+    var name:String // file/directory name
 }
 
 extension FileEntry:Identifiable {
