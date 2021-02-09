@@ -16,14 +16,36 @@ struct ImageView: View {
         imageLoader = ImageLoader(url:url)
     }
     
+    init(withURL url:URL, maxSize:Int) {
+        imageLoader = ImageLoader(url:url)
+        self.maxSize = maxSize
+    }
+    
     var body: some View {
         VStack {
             Image(nsImage: image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
         }.onReceive(imageLoader.didChange) { data in
-            self.image = NSImage(data: data) ?? NSImage()
+            if maxSize > 0 {
+                if let smallImage = getSmallImage(fromData:data) {
+                    self.image = smallImage
+                }
+            }
+            else {
+                self.image = NSImage(data: data) ?? NSImage()
+            }
         }
+    }
+    
+    private var maxSize:Int = 0
+    
+    private func getSmallImage(fromData data:Data) -> NSImage? {
+        guard let ciImage = CIImage(data: data),
+              let cgImage = CGImage.createFrom(ciImage: ciImage) else { return nil }
+        let resizedImage = cgImage.resize(maxSize: maxSize)
+        let nsImage = NSImage(cgImage: resizedImage, size: CGSize(width: resizedImage.width, height: resizedImage.height))
+        return nsImage
     }
 }
 
