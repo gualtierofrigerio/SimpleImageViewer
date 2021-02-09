@@ -8,6 +8,33 @@
 import Cocoa
 import SwiftUI
 
+/*
+ If you can target macOS 11 you can use Scene
+ */
+
+@main
+struct SimpleImageViewer: App {
+    var filesViewModel:FilesViewModel
+    var menuCommandsHandler:MenuCommandsHandler
+    
+    init() {
+        filesViewModel = FilesViewModel()
+        menuCommandsHandler = MenuCommandsHandler(withFilesViewModel: filesViewModel)
+    }
+    
+    var body: some Scene {
+        WindowGroup {
+            ContentView(filesViewModel: filesViewModel)
+        }.commands {
+            MenuCommands(commandsHandler: menuCommandsHandler).commands
+        }
+    }
+}
+
+/*
+
+ this was created by Xcode when I started the macOS project
+ 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -36,4 +63,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 }
-
+*/
