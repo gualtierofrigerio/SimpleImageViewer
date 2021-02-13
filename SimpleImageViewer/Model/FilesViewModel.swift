@@ -6,27 +6,53 @@
 //
 
 import Foundation
+import Combine
 
 /// View model for FilesView
 class FilesViewModel: ObservableObject {
     @Published var entries:[FileEntry] = []
     var supportedExtensions = ["jpg", "png", "heic"]
     
+    init(favoritesManager: FavoritesManager) {
+        self.favoritesManager = favoritesManager
+        favoritesCancellable = favoritesManager.$favorites.sink { _ in
+            self.updateEntries(self.entries)
+        }
+    }
+    
     func setDirectory(_ dir:URL) {
         guard let fileEntries = FilesystemManager.getFileEntries(forDirectory: dir) else { return }
-        var entriesToShow = fileEntries.filter(self.filterClosure).sorted(by: self.sortClosure)
+        var entriesToShow = fileEntries
+            .filter(filterClosure)
+            .sorted(by: sortClosure)
         let parentDir = getParentDir(ofDir: dir)
         entriesToShow.insert(parentDir, at: 0)
+        updateEntries(entriesToShow)
+    }
+    
+    func updateEntries(_ entries:[FileEntry]) {
         DispatchQueue.main.async {
-            self.entries = entriesToShow
+            self.entries = entries.map(self.favoritesClosure)
         }
     }
     
     // MARK: - Private
     
+    private var favoritesCancellable:AnyCancellable?
+    private var favoritesManager:FavoritesManager
+    
     private func getParentDir(ofDir dir:URL) -> FileEntry {
         let parentURL = dir.deletingLastPathComponent()
         return FileEntry(isDir: true, fileURL: parentURL, name: "..")
+    }
+    
+    private func favoritesClosure(entry:FileEntry) -> FileEntry {
+        var newEntry = entry
+        newEntry.isFavorite = favoritesManager.isFavorite(entry)
+        if newEntry.isFavorite {
+            print("new entry is favorite")
+        }
+        return newEntry
     }
     
     private func filterClosure(entry:FileEntry) -> Bool {
