@@ -9,14 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     var coordinator:AppCoordinator
-    var filesViewModel:FilesViewModel {
-        coordinator.fileViewModel
-    }
     
     var body: some View {
         NavigationView {
             VStack {
-                FilesView(viewModel: filesViewModel)
+                FilesView(coordinator: coordinator)
             }
         }
         .frame(minWidth: 400, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
