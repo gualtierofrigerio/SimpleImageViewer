@@ -25,6 +25,7 @@
 		25B3563C25D185D100A451B6 /* SingleEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B3563B25D185D100A451B6 /* SingleEntryView.swift */; };
 		25B3564025D1934800A451B6 /* ImageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B3563F25D1934800A451B6 /* ImageUtils.swift */; };
 		25CD27DC25D81363009B0EB5 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CD27DB25D81363009B0EB5 /* AppCoordinator.swift */; };
+		25CD27E125D81DE4009B0EB5 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CD27E025D81DE4009B0EB5 /* FavoritesManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		25B3563B25D185D100A451B6 /* SingleEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEntryView.swift; sourceTree = "<group>"; };
 		25B3563F25D1934800A451B6 /* ImageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtils.swift; sourceTree = "<group>"; };
 		25CD27DB25D81363009B0EB5 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		25CD27E025D81DE4009B0EB5 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				25AF257225CD81E6003CE640 /* DropUtils.swift */,
+				25CD27E025D81DE4009B0EB5 /* FavoritesManager.swift */,
 				25AF256F25CD801E003CE640 /* FilesystemManager.swift */,
 				25A9410725CB053C00689556 /* ImageLoader.swift */,
 				25B3563F25D1934800A451B6 /* ImageUtils.swift */,
@@ -220,6 +223,7 @@
 				25A940F225CB00A200689556 /* ContentView.swift in Sources */,
 				25A9410825CB053C00689556 /* ImageLoader.swift in Sources */,
 				25AF257025CD801E003CE640 /* FilesystemManager.swift in Sources */,
+				25CD27E125D81DE4009B0EB5 /* FavoritesManager.swift in Sources */,
 				25A940F025CB00A200689556 /* AppDelegate.swift in Sources */,
 				25B3564025D1934800A451B6 /* ImageUtils.swift in Sources */,
 			);
