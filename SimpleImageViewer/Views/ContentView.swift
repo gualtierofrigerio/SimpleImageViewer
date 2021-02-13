@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    var filesViewModel:FilesViewModel
+    var coordinator:AppCoordinator
+    var filesViewModel:FilesViewModel {
+        coordinator.fileViewModel
+    }
     
     var body: some View {
         NavigationView {
@@ -22,6 +25,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(filesViewModel: FilesViewModel())
+        ContentView(coordinator: AppCoordinator())
     }
 }

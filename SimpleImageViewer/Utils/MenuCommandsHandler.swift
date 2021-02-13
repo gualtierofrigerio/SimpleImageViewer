@@ -9,10 +9,8 @@ import AppKit
 import Foundation
 
 class MenuCommandsHandler {
-    var filesViewModel:FilesViewModel
-    
-    init(withFilesViewModel filesViewModel:FilesViewModel) {
-        self.filesViewModel = filesViewModel
+    init(coordinator: AppCoordinator) {
+        self.coordinator = coordinator
     }
     
     func openCommand() {
@@ -27,11 +25,19 @@ class MenuCommandsHandler {
 
         if (dialog.runModal() ==  NSApplication.ModalResponse.OK) {
             if let url = dialog.url {
-                filesViewModel.setDirectory(url)
+                coordinator.setDirectory(url)
             }
         } else {
             print("user cancelled")
             return
         }
     }
+    
+    func showFavorites() {
+        coordinator.showFavorites()
+    }
+    
+    // MARK: - Private
+    
+    private var coordinator:AppCoordinator
 }

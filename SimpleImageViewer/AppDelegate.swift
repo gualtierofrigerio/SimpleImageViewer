@@ -14,17 +14,19 @@ import SwiftUI
 
 @main
 struct SimpleImageViewer: App {
+    var coordinator:AppCoordinator
     var filesViewModel:FilesViewModel
     var menuCommandsHandler:MenuCommandsHandler
     
     init() {
+        coordinator = AppCoordinator()
         filesViewModel = FilesViewModel()
-        menuCommandsHandler = MenuCommandsHandler(withFilesViewModel: filesViewModel)
+        menuCommandsHandler = MenuCommandsHandler(coordinator: coordinator)
     }
     
     var body: some Scene {
         WindowGroup {
-            ContentView(filesViewModel: filesViewModel)
+            ContentView(coordinator: coordinator)
         }.commands {
             MenuCommands(commandsHandler: menuCommandsHandler).commands
         }
