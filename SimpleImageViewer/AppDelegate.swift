@@ -15,12 +15,10 @@ import SwiftUI
 @main
 struct SimpleImageViewer: App {
     var coordinator:AppCoordinator
-    var filesViewModel:FilesViewModel
     var menuCommandsHandler:MenuCommandsHandler
     
     init() {
         coordinator = AppCoordinator()
-        filesViewModel = FilesViewModel()
         menuCommandsHandler = MenuCommandsHandler(coordinator: coordinator)
     }
     
