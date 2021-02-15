@@ -40,7 +40,7 @@ struct FilesView: View {
     private var emptyAction:() -> Void = {} // used on dir entries as you don't need an action
     
     private func selectDirectory(entry:FileEntry) {
-        viewModel.setDirectory(entry.fileURL)
+        coordinator.setDirectory(entry.fileURL)
     }
     
     private func toggleFavorite(_ entry:FileEntry) {
