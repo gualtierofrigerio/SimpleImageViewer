@@ -16,7 +16,7 @@ struct MenuCommands {
                 commandsHandler.openCommand()
             }
             Button("Show Favorites") {
-                commandsHandler.showFavorites()
+                commandsHandler.showFavoritesCommand()
             }
         }
     }
