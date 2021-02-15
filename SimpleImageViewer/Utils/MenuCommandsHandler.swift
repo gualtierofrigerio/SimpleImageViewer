@@ -33,7 +33,7 @@ class MenuCommandsHandler {
         }
     }
     
-    func showFavorites() {
+    func showFavoritesCommand() {
         coordinator.showFavorites()
     }
     
