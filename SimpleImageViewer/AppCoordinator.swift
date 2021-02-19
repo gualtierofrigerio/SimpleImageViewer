@@ -1,8 +1,8 @@
 //
-//  AppCoordinator.swift
+//  File.swift
 //  SimpleImageViewer
 //
-//  Created by Gualtiero Frigerio on 13/02/21.
+//  Created by Gualtiero Frigerio on 18/02/21.
 //
 
 import Foundation
@@ -11,7 +11,6 @@ class AppCoordinator {
     private (set) var filesViewModel:FilesViewModel
     
     init() {
-        favoritesManager = FavoritesManager()
         filesViewModel = FilesViewModel(favoritesManager: favoritesManager)
     }
     
@@ -30,5 +29,5 @@ class AppCoordinator {
         favoritesManager.toggle(fileEntry: entry)
     }
     
-    private var favoritesManager:FavoritesManager
+    private var favoritesManager:FavoritesManager = FavoritesManager()
 }
