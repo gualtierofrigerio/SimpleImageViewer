@@ -7,10 +7,13 @@
 
 import SwiftUI
 
-struct MenuCommands {
+struct MenuCommands: Commands {
     var commandsHandler:MenuCommandsHandler
     
-    var commands: some Commands {
+    var body: some Commands {
+        CommandGroup(replacing: CommandGroupPlacement.newItem) {
+            // replace with nothing so we don't have to deal with multiple windows
+        }
         CommandGroup(after: CommandGroupPlacement.newItem) {
             Button("Open...") {
                 commandsHandler.openCommand()
