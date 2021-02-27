@@ -16,11 +16,11 @@ class ImageLoader: ObservableObject {
         }
     }
     
-    init(url:URL) {
+    func load(url:URL) {
         loadImage(fromURL: url)
     }
     
-    init(urlString:String) {
+    func load(urlString:String) {
         guard let url = URL(string: urlString) else { return }
         loadImage(fromURL: url)
     }
