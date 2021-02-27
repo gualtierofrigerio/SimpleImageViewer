@@ -9,15 +9,15 @@ import Combine
 import SwiftUI
 
 struct ImageView: View {
-    @ObservedObject var imageLoader:ImageLoader
+    @ObservedObject var imageLoader = ImageLoader()
     @State var image:NSImage = NSImage()
     
     init(withURL url:URL) {
-        imageLoader = ImageLoader(url:url)
+        imageLoader.load(url:url)
     }
     
     init(withURL url:URL, maxSize:Int) {
-        imageLoader = ImageLoader(url:url)
+        imageLoader.load(url:url)
         self.maxSize = maxSize
     }
     
@@ -26,7 +26,8 @@ struct ImageView: View {
             Image(nsImage: image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-        }.onReceive(imageLoader.didChange) { data in
+        }
+        .onReceive(imageLoader.didChange) { data in
             if maxSize > 0 {
                 if let smallImage = getSmallImage(fromData:data) {
                     self.image = smallImage
