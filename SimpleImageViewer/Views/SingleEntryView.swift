@@ -21,7 +21,9 @@ struct SingleEntryView: View {
         }
         else {
             HStack {
-                ImageViewLazy(withURL: entry.fileURL)
+                //ImageViewLazy(withURL: entry.fileURL)
+                //ImageView(withURL: entry.fileURL, maxSize: 200)
+                ThumbnailView(withURL: entry.fileURL, maxSize: 200)
                 Text(entry.name)
                 Button(action: buttonAction, label: {
                     Image(systemName:favoriteImageName)
