@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2586136325DEA80A00941A46 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586136225DEA80A00941A46 /* AppCoordinator.swift */; };
+		258A1EFB26D3D9EF00B92BDE /* ThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258A1EFA26D3D9EF00B92BDE /* ThumbnailView.swift */; };
+		258A1EFD26D3DFB900B92BDE /* ThumbnailLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258A1EFC26D3DFB900B92BDE /* ThumbnailLoader.swift */; };
 		2595AA1725E6A9CF007D50D7 /* ImageViewLazy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2595AA1625E6A9CF007D50D7 /* ImageViewLazy.swift */; };
 		25A940F025CB00A200689556 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A940EF25CB00A200689556 /* AppDelegate.swift */; };
 		25A940F225CB00A200689556 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A940F125CB00A200689556 /* ContentView.swift */; };
@@ -31,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		2586136225DEA80A00941A46 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		258A1EFA26D3D9EF00B92BDE /* ThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailView.swift; sourceTree = "<group>"; };
+		258A1EFC26D3DFB900B92BDE /* ThumbnailLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailLoader.swift; sourceTree = "<group>"; };
 		2595AA1625E6A9CF007D50D7 /* ImageViewLazy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewLazy.swift; sourceTree = "<group>"; };
 		25A940EC25CB00A200689556 /* SimpleImageViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleImageViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25A940EF25CB00A200689556 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +121,7 @@
 				25B3563525D17A9A00A451B6 /* MenuCommands.swift */,
 				25AF257A25CD8D71003CE640 /* SingleImageView.swift */,
 				25B3563B25D185D100A451B6 /* SingleEntryView.swift */,
+				258A1EFA26D3D9EF00B92BDE /* ThumbnailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -130,6 +135,7 @@
 				25A9410725CB053C00689556 /* ImageLoader.swift */,
 				25B3563F25D1934800A451B6 /* ImageUtils.swift */,
 				25B3563225D177B900A451B6 /* MenuCommandsHandler.swift */,
+				258A1EFC26D3DFB900B92BDE /* ThumbnailLoader.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -216,6 +222,7 @@
 				25AF257B25CD8D71003CE640 /* SingleImageView.swift in Sources */,
 				25AF257325CD81E6003CE640 /* DropUtils.swift in Sources */,
 				25B3563C25D185D100A451B6 /* SingleEntryView.swift in Sources */,
+				258A1EFB26D3D9EF00B92BDE /* ThumbnailView.swift in Sources */,
 				2595AA1725E6A9CF007D50D7 /* ImageViewLazy.swift in Sources */,
 				25A9410425CB048700689556 /* ImageView.swift in Sources */,
 				25AF256725CD7E64003CE640 /* FilesView.swift in Sources */,
@@ -224,6 +231,7 @@
 				25B3563625D17A9A00A451B6 /* MenuCommands.swift in Sources */,
 				25AF256A25CD7EE1003CE640 /* FileEntry.swift in Sources */,
 				25A940F225CB00A200689556 /* ContentView.swift in Sources */,
+				258A1EFD26D3DFB900B92BDE /* ThumbnailLoader.swift in Sources */,
 				2586136325DEA80A00941A46 /* AppCoordinator.swift in Sources */,
 				25A9410825CB053C00689556 /* ImageLoader.swift in Sources */,
 				25AF257025CD801E003CE640 /* FilesystemManager.swift in Sources */,
