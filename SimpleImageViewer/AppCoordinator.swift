@@ -8,10 +8,13 @@
 import Foundation
 
 class AppCoordinator {
-    private (set) var filesViewModel:FilesViewModel
+    private (set) var filesViewModel: FilesViewModel
+    private (set) var detailImageViewModel: DetailImageViewModel
+    var currentImageURL:URL?
     
     init() {
         filesViewModel = FilesViewModel(favoritesManager: favoritesManager)
+        detailImageViewModel = DetailImageViewModel()
     }
     
     func setDirectory(_ url:URL) {
@@ -23,6 +26,10 @@ class AppCoordinator {
             FileEntry.createFromFileString($0)
         }
         filesViewModel.updateEntries(allFavorites)
+    }
+    
+    func showImage(atURL url: URL) {
+        detailImageViewModel.showImage(atURL: url)
     }
     
     func toogleFavorite(forFileEntry entry:FileEntry) {
