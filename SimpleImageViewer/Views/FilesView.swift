@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FilesView: View {
     @ObservedObject var viewModel:FilesViewModel
-    @State var openImage = false
+    @State var alwaysActive = true
     
     init(coordinator:AppCoordinator) {
         self.coordinator = coordinator
@@ -18,7 +18,8 @@ struct FilesView: View {
     
     var body: some View {
         //listView() // uncomment to use old implementation with List
-        NavigationLink(destination: SingleImageView(imageURL:selectedImageURL), isActive: $openImage){}.hidden()
+        NavigationLink(destination: DetailImageView(viewModel: coordinator.detailImageViewModel),
+                       isActive: $alwaysActive){}.hidden()
         ScrollView {
             LazyVStack(alignment: .leading) {
                 ForEach(viewModel.entries) { entry in
@@ -30,8 +31,7 @@ struct FilesView: View {
                     }
                     else {
                         Button(action: {
-                            self.selectedImageURL = entry.fileURL
-                            self.openImage = true
+                            coordinator.showImage(atURL: entry.fileURL)
                         }) {
                             SingleEntryView(buttonAction:{
                                 toggleFavorite(entry)
@@ -48,7 +48,6 @@ struct FilesView: View {
     // MARK: - Private
     private var coordinator:AppCoordinator
     private var emptyAction:() -> Void = {} // used on dir entries as you don't need an action
-    @State private var selectedImageURL:URL = URL(string:"url")!
     
     private func selectDirectory(entry:FileEntry) {
         coordinator.setDirectory(entry.fileURL)
