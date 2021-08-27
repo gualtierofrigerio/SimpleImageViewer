@@ -20,14 +20,17 @@ struct FilesView: View {
         //listView() // uncomment to use old implementation with List
         NavigationLink(destination: DetailImageView(viewModel: coordinator.detailImageViewModel),
                        isActive: $alwaysActive){}.hidden()
+        if noEntries {
+            Text("Drag a folder here")
+        }
         ScrollView {
             LazyVStack(alignment: .leading) {
                 ForEach(viewModel.entries) { entry in
                     if entry.isDir {
                         Button(action:{
-                                selectDirectory(entry:entry)}) {
-                            SingleEntryView(buttonAction:emptyAction, entry: entry)
-                        }.buttonStyle(PlainButtonStyle())
+                            selectDirectory(entry:entry)}) {
+                                SingleEntryView(buttonAction:emptyAction, entry: entry)
+                            }.buttonStyle(PlainButtonStyle())
                     }
                     else {
                         Button(action: {
@@ -36,7 +39,7 @@ struct FilesView: View {
                             SingleEntryView(buttonAction:{
                                 toggleFavorite(entry)
                             }, entry: entry)
-                            .frame(width:nil, height:250)
+                                .frame(width:nil, height:250)
                         }.buttonStyle(PlainButtonStyle())
                     }
                 }
@@ -48,6 +51,10 @@ struct FilesView: View {
     // MARK: - Private
     private var coordinator:AppCoordinator
     private var emptyAction:() -> Void = {} // used on dir entries as you don't need an action
+    
+    private var noEntries: Bool {
+        viewModel.entries.count == 0
+    }
     
     private func selectDirectory(entry:FileEntry) {
         coordinator.setDirectory(entry.fileURL)
