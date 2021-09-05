@@ -8,9 +8,16 @@
 import AppKit
 import QuickLookThumbnailing
 
+/// Wrapper for QLThumbnailGenerator
+/// the class is ObservableObject and has a @Published var so
+/// a view can observe it and load a thumbnail as soon as it is ready
 class ThumbnailLoader: ObservableObject {
     @Published var image = NSImage()
     
+    /// Tries to load a thumbnail for a given URL
+    /// - Parameters:
+    ///   - url: URL of the image
+    ///   - maxSize: maximum size (width/height) aspect ratio preserved
     func loadThumbnail(url: URL, maxSize: Int) {
         let size = CGSize(width: maxSize, height: maxSize)
         let scale = 1.0
