@@ -8,7 +8,12 @@
 import Foundation
 import CoreImage
 
+/// Extention to add utility function to CGImage
 extension CGImage {
+    
+    /// Create a CGImage from a CIImage
+    /// - Parameter ciImage: the CIImage from which the CGImage is created
+    /// - Returns: An optional CGImage if the conversion is possible
     class func createFrom(ciImage:CIImage) -> CGImage? {
         let context = CIContext(options: nil)
         if let cgImage = context.createCGImage(ciImage, from: ciImage.extent) {
@@ -17,6 +22,9 @@ extension CGImage {
         return nil
     }
     
+    /// Resize the current CGImage to the given size
+    /// - Parameter size: size of the new image
+    /// - Returns: A new CGImage resized from the current one
     func resize(size:CGSize) -> CGImage {
         let context = CGContext(data: nil,
                                 width: Int(size.width),
@@ -30,6 +38,10 @@ extension CGImage {
         return context?.makeImage() ?? self
     }
     
+    /// Resize the current CGImage to the maximum size specified by the parameter.
+    /// The aspect ratio is preserved
+    /// - Parameter maxSize: maximum width/height of the new image
+    /// - Returns: A new CGImage resised from the current one
     func resize(maxSize:Int) -> CGImage {
         var newSize = CGSize.zero
         let ratio = CGFloat(width / height)

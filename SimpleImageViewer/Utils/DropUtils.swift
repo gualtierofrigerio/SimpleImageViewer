@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+/// Implements the drag and drop functionallity 
 class DropUtils {
     class func urlFromDropInfo(_ info:DropInfo, completion: @escaping (URL?) -> Void)  {
         guard let itemProvider = info.itemProviders(for: [(kUTTypeFileURL as String)]).first else {
