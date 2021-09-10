@@ -16,6 +16,9 @@ struct FileEntry {
 }
 
 extension FileEntry {
+    /// Create a FileEntry from a File at a given path
+    /// - Parameter path: String describing the path of the file to read
+    /// - Returns: An optional FileEntry constructed from the given file
     static func createFromFileString(_ path:String) -> Self? {
         let absolutePath = path.replacingOccurrences(of: "file://", with: "")
         let fileManager = FileManager.default
