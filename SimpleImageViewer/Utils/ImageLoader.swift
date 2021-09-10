@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 
+/// Observable object responsible to load an image to be used by SwiftUI views
 class ImageLoader: ObservableObject {
     var didChange = PassthroughSubject<Data, Never>()
     var data = Data() {
@@ -16,10 +17,14 @@ class ImageLoader: ObservableObject {
         }
     }
     
-    func load(url:URL) {
+    /// Load an image at the given URL
+    /// - Parameter url: The image URL
+    func load(url: URL) {
         loadImage(fromURL: url)
     }
     
+    /// Load an image from a given string
+    /// - Parameter urlString: The string representing the image URL
     func load(urlString:String) {
         guard let url = URL(string: urlString) else { return }
         loadImage(fromURL: url)

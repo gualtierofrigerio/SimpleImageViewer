@@ -8,11 +8,16 @@
 import AppKit
 import Foundation
 
+/// Handles the execution of commands from the macOS menu
 class MenuCommandsHandler {
+    /// Initializer
+    /// Requires the AppCoordinator to execute commands
+    /// - Parameter coordinator: The AppCoordinator
     init(coordinator: AppCoordinator) {
         self.coordinator = coordinator
     }
     
+    /// Executed when the open menu voice is clicked
     func openCommand() {
         let dialog = NSOpenPanel();
 
@@ -33,6 +38,7 @@ class MenuCommandsHandler {
         }
     }
     
+    /// Executed when the favorites menu voice is clicked
     func showFavoritesCommand() {
         coordinator.showFavorites()
     }
