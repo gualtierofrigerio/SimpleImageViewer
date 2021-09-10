@@ -20,7 +20,10 @@ class FilesViewModel: ObservableObject {
         }
     }
     
-    func setDirectory(_ dir:URL) {
+    /// Sets the current directory and updates the entries variable
+    /// so the view objserving entries can be updated
+    /// - Parameter dir: URL of the directory
+    func setDirectory(_ dir: URL) {
         guard let fileEntries = FilesystemManager.getFileEntries(forDirectory: dir) else { return }
         var entriesToShow = fileEntries
             .filter(filterClosure)
@@ -30,6 +33,8 @@ class FilesViewModel: ObservableObject {
         updateEntries(entriesToShow)
     }
     
+    /// Updates the entries variable in the main thread
+    /// - Parameter entries: array of FileEntry that will be set to entries
     func updateEntries(_ entries:[FileEntry]) {
         DispatchQueue.main.async {
             self.entries = entries.map(self.favoritesClosure)

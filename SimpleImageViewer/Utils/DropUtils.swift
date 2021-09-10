@@ -8,8 +8,12 @@
 import Foundation
 import SwiftUI
 
-/// Implements the drag and drop functionallity 
+/// Utility class to implement the drag and drop functionallity 
 class DropUtils {
+    /// Extract the URL of a file from the DropInfo object
+    /// - Parameters:
+    ///   - info: The DropInfo object
+    ///   - completion: completion handler with an optional URL
     class func urlFromDropInfo(_ info:DropInfo, completion: @escaping (URL?) -> Void)  {
         guard let itemProvider = info.itemProviders(for: [(kUTTypeFileURL as String)]).first else {
             completion(nil)
