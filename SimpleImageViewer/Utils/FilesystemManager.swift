@@ -7,7 +7,11 @@
 
 import Foundation
 
+/// Helper class to manage files
 class FilesystemManager {
+    /// Reads files into a directory and returns an array of FileEntry
+    /// - Parameter dir: URL of the directory to scan
+    /// - Returns: An optional array of FileEntry
     static func getFileEntries(forDirectory dir:URL) -> [FileEntry]? {
         let fileManager = FileManager()
         guard let items = try? fileManager.contentsOfDirectory(at: dir,
