@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct SingleEntryView: View {
-    var buttonAction:() -> Void
-    var entry:FileEntry
+    @ObservedObject var viewModel: SingleEntryViewModel
     
     var body: some View {
         if entry.isDir {
@@ -23,11 +22,15 @@ struct SingleEntryView: View {
             HStack {
                 ThumbnailView(withURL: entry.fileURL, maxSize: 200)
                 Text(entry.name)
-                Button(action: buttonAction, label: {
+                Button(action: viewModel.buttonAction, label: {
                     Image(systemName:favoriteImageName)
                 }).buttonStyle(PlainButtonStyle())
             }
         }
+    }
+    
+    private var entry: FileEntry {
+        viewModel.entry
     }
     
     private var favoriteImageName:String {
