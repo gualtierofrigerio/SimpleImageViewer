@@ -29,16 +29,14 @@ struct FilesView: View {
                     if entry.isDir {
                         Button(action:{
                             selectDirectory(entry:entry)}) {
-                                SingleEntryView(buttonAction:emptyAction, entry: entry)
+                                SingleEntryView(viewModel: viewModel(forEntry: entry))
                             }.buttonStyle(PlainButtonStyle())
                     }
                     else {
                         Button(action: {
                             coordinator.showImage(atURL: entry.fileURL)
                         }) {
-                            SingleEntryView(buttonAction:{
-                                toggleFavorite(entry)
-                            }, entry: entry)
+                            SingleEntryView(viewModel: viewModel(forEntry: entry))
                                 .frame(width:nil, height:250)
                         }.buttonStyle(PlainButtonStyle())
                     }
@@ -56,12 +54,16 @@ struct FilesView: View {
         viewModel.entries.count == 0
     }
     
-    private func selectDirectory(entry:FileEntry) {
+    private func selectDirectory(entry: FileEntry) {
         coordinator.setDirectory(entry.fileURL)
     }
     
-    private func toggleFavorite(_ entry:FileEntry) {
+    private func toggleFavorite(_ entry: FileEntry) {
         coordinator.toogleFavorite(forFileEntry: entry)
+    }
+    
+    private func viewModel(forEntry entry: FileEntry) -> SingleEntryViewModel {
+        SingleEntryViewModel(entry: entry, coordinator: coordinator)
     }
 }
 
@@ -69,20 +71,20 @@ struct FilesView: View {
 extension FilesView {
     private func listView() -> some View {
         List(viewModel.entries) { entry in
-            if entry.isDir {
-                Button(action:{
-                        selectDirectory(entry:entry)}) {
-                    SingleEntryView(buttonAction:emptyAction, entry: entry)
-                }.buttonStyle(PlainButtonStyle())
-            }
-            else {
-                NavigationLink(
-                    destination: SingleImageView(imageURL: entry.fileURL)) {
-                    SingleEntryView(buttonAction:{
-                        toggleFavorite(entry)
-                    }, entry: entry)
-                }
-            }
+//            if entry.isDir {
+//                Button(action:{
+//                        selectDirectory(entry:entry)}) {
+//                    SingleEntryView(buttonAction:emptyAction, entry: entry)
+//                }.buttonStyle(PlainButtonStyle())
+//            }
+//            else {
+//                NavigationLink(
+//                    destination: SingleImageView(imageURL: entry.fileURL)) {
+//                    SingleEntryView(buttonAction:{
+//                        toggleFavorite(entry)
+//                    }, entry: entry)
+//                }
+//            }
         }
     }
 }
