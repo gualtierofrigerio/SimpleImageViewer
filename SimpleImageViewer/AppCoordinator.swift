@@ -8,8 +8,10 @@
 import Foundation
 
 class AppCoordinator {
-    private (set) var filesViewModel: FilesViewModel
     private (set) var detailImageViewModel: DetailImageViewModel
+    private (set) var favoritesManager: FavoritesManager = FavoritesManager()
+    private (set) var filesViewModel: FilesViewModel
+    
     var currentImageURL:URL?
     
     init() {
@@ -35,6 +37,4 @@ class AppCoordinator {
     func toogleFavorite(forFileEntry entry:FileEntry) {
         favoritesManager.toggle(fileEntry: entry)
     }
-    
-    private var favoritesManager:FavoritesManager = FavoritesManager()
 }
