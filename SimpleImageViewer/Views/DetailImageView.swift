@@ -13,7 +13,9 @@ struct DetailImageView: View {
     var body: some View {
         VStack {
             if let url = viewModel.imageURL {
-                SingleImageView(imageURL: url)
+                ScrollView([.horizontal, .vertical]) {
+                    SingleImageView(imageURL: url)
+                }
             }
             else {
                 Text("Select an image from the list")
