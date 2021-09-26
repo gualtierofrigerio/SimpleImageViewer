@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct SingleImageView: View {
-    var imageURL:URL
+    var imageURL: URL
+    var containerSize: CGSize
     
     var body: some View {
         ImageView(withURL: imageURL)
-            .frame(width: 1024 * self.scale, height: 1024 * self.scale)
+            .frame(width: containerSize.width * self.scale,
+                   height: containerSize.height * self.scale)
             .gesture(MagnificationGesture()
                         .onChanged { value in
                             if checkScale(value.magnitude) {
@@ -32,6 +34,6 @@ struct SingleImageView: View {
 
 struct SingleImageView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleImageView(imageURL: URL(string: "")!)
+        SingleImageView(imageURL: URL(string: "")!, containerSize: CGSize(width: 0, height: 0))
     }
 }
