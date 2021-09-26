@@ -12,7 +12,21 @@ struct SingleImageView: View {
     
     var body: some View {
         ImageView(withURL: imageURL)
+            .frame(width: 1024 * self.scale, height: 1024 * self.scale)
+            .gesture(MagnificationGesture()
+                        .onChanged { value in
+                            if checkScale(value.magnitude) {
+                                self.scale = value.magnitude
+                            }
+                        }
+                    )
         Text(imageURL.lastPathComponent)
+    }
+    
+    @State private var scale: CGFloat = 1.0
+    
+    private func checkScale(_ scale: CGFloat) -> Bool {
+        scale > 0.5 && scale < 3
     }
 }
 
