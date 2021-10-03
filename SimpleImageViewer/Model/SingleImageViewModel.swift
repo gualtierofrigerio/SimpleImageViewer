@@ -25,7 +25,8 @@ class SingleImageViewModel: ObservableObject {
     // MARK: - Private
     
     private func updateMagnification(_ value: CGFloat) {
-        if value > 0.5 && value < 3 {
+        let adjustedValue = scale * value
+        if adjustedValue > 0.5 && adjustedValue < 3 {
             scale = value
             sliderValue = value
         }
