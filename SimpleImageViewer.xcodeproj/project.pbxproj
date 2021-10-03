@@ -32,6 +32,7 @@
 		25C72A4726D94627000266D7 /* DetailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C72A4626D94627000266D7 /* DetailImageView.swift */; };
 		25CD27E125D81DE4009B0EB5 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CD27E025D81DE4009B0EB5 /* FavoritesManager.swift */; };
 		25DF0AC826EBABB000188575 /* SingleEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF0AC726EBABB000188575 /* SingleEntryViewModel.swift */; };
+		25E065C326F4F9F0005490BC /* SingleImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E065C226F4F9F0005490BC /* SingleImageViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		25C72A4626D94627000266D7 /* DetailImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageView.swift; sourceTree = "<group>"; };
 		25CD27E025D81DE4009B0EB5 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
 		25DF0AC726EBABB000188575 /* SingleEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleEntryViewModel.swift; sourceTree = "<group>"; };
+		25E065C226F4F9F0005490BC /* SingleImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				25AF257625CD87EB003CE640 /* FilesViewModel.swift */,
 				25C72A4426D94517000266D7 /* DetailImageViewModel.swift */,
 				25DF0AC726EBABB000188575 /* SingleEntryViewModel.swift */,
+				25E065C226F4F9F0005490BC /* SingleImageViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25AF257B25CD8D71003CE640 /* SingleImageView.swift in Sources */,
+				25E065C326F4F9F0005490BC /* SingleImageViewModel.swift in Sources */,
 				25AF257325CD81E6003CE640 /* DropUtils.swift in Sources */,
 				25B3563C25D185D100A451B6 /* SingleEntryView.swift in Sources */,
 				258A1EFB26D3D9EF00B92BDE /* ThumbnailView.swift in Sources */,
