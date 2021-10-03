@@ -11,24 +11,19 @@ struct SingleImageView: View {
     var imageURL: URL
     var containerSize: CGSize
     
+    @ObservedObject var viewModel = SingleImageViewModel()
+    
     var body: some View {
+        Slider(value: $viewModel.sliderValue, in: 0.5...3)
         ImageView(withURL: imageURL)
-            .frame(width: containerSize.width * self.scale,
-                   height: containerSize.height * self.scale)
+            .frame(width: containerSize.width * viewModel.scale,
+                   height: containerSize.height * viewModel.scale)
             .gesture(MagnificationGesture()
                         .onChanged { value in
-                            if checkScale(value.magnitude) {
-                                self.scale = value.magnitude
-                            }
+                            viewModel.magnificationValue = value
                         }
                     )
         Text(imageURL.lastPathComponent)
-    }
-    
-    @State private var scale: CGFloat = 1.0
-    
-    private func checkScale(_ scale: CGFloat) -> Bool {
-        scale > 0.5 && scale < 3
     }
 }
 
