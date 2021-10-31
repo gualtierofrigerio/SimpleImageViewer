@@ -8,6 +8,12 @@
 import SwiftUI
 
 class SingleImageViewModel: ObservableObject {
+    internal init(imageURL: URL) {
+        self.imageURL = imageURL
+    }
+    
+    let imageURL: URL
+    
     @Published var magnificationValue: CGFloat = 1.0 {
         didSet {
             updateMagnification(magnificationValue)
