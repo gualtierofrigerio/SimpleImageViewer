@@ -22,6 +22,9 @@ struct SingleImageView: View {
                         .onChanged { value in
                             viewModel.magnificationValue = value
                         }
+                        .onEnded{ Value in
+                            viewModel.endedMagnification()
+                        }
                     )
         Text(imageURL.lastPathComponent)
     }
