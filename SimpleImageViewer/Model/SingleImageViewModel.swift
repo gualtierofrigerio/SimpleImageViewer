@@ -16,12 +16,6 @@ class SingleImageViewModel: ObservableObject {
     
     @Published var scale: CGFloat = 1.0
     
-    @Published var sliderValue: CGFloat = 1.0 {
-        didSet {
-            updateSlider(sliderValue)
-        }
-    }
-    
     func endedMagnification() {
         withAnimation {
             scale = 1.0
@@ -33,13 +27,6 @@ class SingleImageViewModel: ObservableObject {
     private func updateMagnification(_ value: CGFloat) {
         let adjustedValue = scale * value
         if adjustedValue > 0.5 && adjustedValue < 3 {
-            scale = value
-            sliderValue = value
-        }
-    }
-    
-    private func updateSlider(_ value: CGFloat) {
-        if value > 0.5 && value < 3 {
             scale = value
         }
     }
