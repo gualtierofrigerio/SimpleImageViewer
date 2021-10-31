@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct SingleImageView: View {
+    @ObservedObject var viewModel: SingleImageViewModel
     var imageURL: URL
     var containerSize: CGSize
-    
-    @ObservedObject var viewModel = SingleImageViewModel()
     
     var body: some View {
         ImageView(withURL: imageURL)
@@ -51,6 +50,8 @@ struct SingleImageViewGestureState: View {
 
 struct SingleImageView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleImageView(imageURL: URL(string: "")!, containerSize: CGSize(width: 0, height: 0))
+        SingleImageView(viewModel: SingleImageViewModel(),
+                        imageURL: URL(string: "")!,
+                        containerSize: CGSize(width: 0, height: 0))
     }
 }
