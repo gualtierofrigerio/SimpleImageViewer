@@ -16,12 +16,10 @@ struct DetailImageView: View {
                 VStack {
                     GeometryReader { proxy in
                         ScrollView([.horizontal, .vertical]) {
-                            SingleImageView(viewModel: imageViewModel,
-                                            imageURL: url,
+                            SingleImageView(viewModel: singleImageViewModel(withURL: url),
                                             containerSize: proxy.size)
                         }
                     }
-                    Text(viewModel.imageURL?.absoluteString ?? "")
                 }
             }
             else {
@@ -29,9 +27,10 @@ struct DetailImageView: View {
             }
         }
     }
-     
-    private let imageViewModel = SingleImageViewModel()
     
+    private func singleImageViewModel(withURL: URL) -> SingleImageViewModel {
+        SingleImageViewModel(imageURL: withURL)
+    }
 }
 
 struct DetailImageView_Previews: PreviewProvider {
