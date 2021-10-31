@@ -21,9 +21,15 @@ class SingleImageViewModel: ObservableObject {
             updateSlider(sliderValue)
         }
     }
+    
+    func endedMagnification() {
+        withAnimation {
+            scale = 1.0
+        }
+    }
  
     // MARK: - Private
-    
+        
     private func updateMagnification(_ value: CGFloat) {
         let adjustedValue = scale * value
         if adjustedValue > 0.5 && adjustedValue < 3 {
