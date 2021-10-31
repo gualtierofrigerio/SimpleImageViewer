@@ -9,11 +9,10 @@ import SwiftUI
 
 struct SingleImageView: View {
     @ObservedObject var viewModel: SingleImageViewModel
-    var imageURL: URL
     var containerSize: CGSize
     
     var body: some View {
-        ImageView(withURL: imageURL)
+        ImageView(withURL: viewModel.imageURL)
             .frame(width: containerSize.width * viewModel.scale,
                    height: containerSize.height * viewModel.scale)
             .gesture(MagnificationGesture()
@@ -24,7 +23,7 @@ struct SingleImageView: View {
                             viewModel.endedMagnification()
                         }
                     )
-        Text(imageURL.lastPathComponent)
+        Text(viewModel.imageURL.lastPathComponent)
     }
 }
 
@@ -50,8 +49,7 @@ struct SingleImageViewGestureState: View {
 
 struct SingleImageView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleImageView(viewModel: SingleImageViewModel(),
-                        imageURL: URL(string: "")!,
+        SingleImageView(viewModel: SingleImageViewModel(imageURL: URL(string: "")!),
                         containerSize: CGSize(width: 0, height: 0))
     }
 }
