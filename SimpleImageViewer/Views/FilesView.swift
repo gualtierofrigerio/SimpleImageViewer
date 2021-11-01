@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct FilesView: View {
-    @ObservedObject var viewModel:FilesViewModel
+    @ObservedObject var viewModel: FilesViewModel
     @State var alwaysActive = true
+    @State var imageActive = false
+    @State var videoActive = false
     
     init(coordinator:AppCoordinator) {
         self.coordinator = coordinator
@@ -19,7 +21,9 @@ struct FilesView: View {
     var body: some View {
         //listView() // uncomment to use old implementation with List
         NavigationLink(destination: DetailImageView(viewModel: coordinator.detailImageViewModel),
-                       isActive: $alwaysActive){}.hidden()
+                       isActive: $imageActive){}.hidden()
+        NavigationLink(destination: DetailVideoView(viewModel: coordinator.detailVideoViewModel),
+                       isActive: $videoActive){}.hidden()
         if noEntries {
             Text("Drag a folder here")
         }
@@ -32,9 +36,19 @@ struct FilesView: View {
                                 SingleEntryView(viewModel: viewModel(forEntry: entry))
                             }.buttonStyle(PlainButtonStyle())
                     }
+                    else if entry.isVideo {
+                        Button(action: {
+                            coordinator.showVideo(atURL: entry.fileURL)
+                            videoActive = true
+                        }) {
+                            SingleEntryView(viewModel: viewModel(forEntry: entry))
+                                .frame(width:nil, height:250)
+                        }.buttonStyle(PlainButtonStyle())
+                    }
                     else {
                         Button(action: {
                             coordinator.showImage(atURL: entry.fileURL)
+                            imageActive = true
                         }) {
                             SingleEntryView(viewModel: viewModel(forEntry: entry))
                                 .frame(width:nil, height:250)
@@ -47,8 +61,8 @@ struct FilesView: View {
     }
     
     // MARK: - Private
-    private var coordinator:AppCoordinator
-    private var emptyAction:() -> Void = {} // used on dir entries as you don't need an action
+    private var coordinator: AppCoordinator
+    private var emptyAction: () -> Void = {} // used on dir entries as you don't need an action
     
     private var noEntries: Bool {
         viewModel.entries.count == 0
