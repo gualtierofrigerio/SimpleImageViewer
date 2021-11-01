@@ -12,11 +12,11 @@ struct DetailImageView: View {
     
     var body: some View {
         VStack {
-            if let _ = viewModel.imageURL {
+            if let singleImageViewModel = viewModel.singleImageViewModel {
                 VStack {
                     GeometryReader { proxy in
                         ScrollView([.horizontal, .vertical]) {
-                            SingleImageView(viewModel: viewModel.singleImageViewModel,
+                            SingleImageView(viewModel: singleImageViewModel,
                                             containerSize: proxy.size)
                         }
                     }
