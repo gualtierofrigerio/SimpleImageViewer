@@ -9,10 +9,11 @@ import Foundation
 
 /// Describes a filesystem entry
 struct FileEntry {
-    var isDir:Bool // true if it is a directory
-    var isFavorite:Bool = false // true if is part of the user favorites
-    var fileURL:URL // full path url string
-    var name:String // file/directory name
+    var isDir: Bool // true if it is a directory
+    var isFavorite: Bool = false // true if is part of the user favorites
+    var isVideo: Bool = false // true if it is a video
+    var fileURL: URL // full path url string
+    var name: String // file/directory name
 }
 
 extension FileEntry {
@@ -29,8 +30,12 @@ extension FileEntry {
         }
         let url = URL(fileURLWithPath: absolutePath)
         let name = url.lastPathComponent
+        var isVideo = false
+        if url.pathExtension == "mov" {
+            isVideo = true
+        }
         
-        return FileEntry(isDir: isDir.boolValue, fileURL: url, name: name)
+        return FileEntry(isDir: isDir.boolValue, isVideo: isVideo, fileURL: url, name: name)
     }
 }
 
