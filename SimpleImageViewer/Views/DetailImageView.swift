@@ -12,13 +12,19 @@ struct DetailImageView: View {
     
     var body: some View {
         VStack {
-            if let url = viewModel.imageURL {
+            if let _ = viewModel.imageURL {
                 VStack {
                     GeometryReader { proxy in
                         ScrollView([.horizontal, .vertical]) {
-                            SingleImageView(viewModel: singleImageViewModel(withURL: url),
+                            SingleImageView(viewModel: viewModel.singleImageViewModel,
                                             containerSize: proxy.size)
                         }
+                    }
+                    HStack {
+                        Text(viewModel.imageURL?.absoluteString ?? "")
+                        Stepper("Zoom level \(viewModel.currentZoomDisplay)",
+                                value: $viewModel.stepperValue,
+                                in: 0...9)
                     }
                 }
             }
@@ -26,10 +32,6 @@ struct DetailImageView: View {
                 Text("Select an image from the list")
             }
         }
-    }
-    
-    private func singleImageViewModel(withURL: URL) -> SingleImageViewModel {
-        SingleImageViewModel(imageURL: withURL)
     }
 }
 
