@@ -13,11 +13,17 @@ struct DetailVideoView: View {
     
     var body: some View {
         if let url = viewModel.videoURL {
-            VideoPlayer(player: AVPlayer(url: url))
+            VideoPlayer(player: playerForURL(url))
         }
         else {
             Text("Select a video on the left")
         }
+    }
+    
+    private func playerForURL(_ url: URL) -> AVPlayer {
+        let player = AVPlayer(url: url)
+        player.play()
+        return player
     }
 }
 
