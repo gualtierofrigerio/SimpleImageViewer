@@ -7,11 +7,16 @@
 
 import Foundation
 
+enum FileEntryType {
+    case directory
+    case image
+    case video
+}
+
 /// Describes a filesystem entry
 struct FileEntry {
-    var isDir: Bool // true if it is a directory
+    var type: FileEntryType
     var isFavorite: Bool = false // true if is part of the user favorites
-    var isVideo: Bool = false // true if it is a video
     var fileURL: URL // full path url string
     var name: String // file/directory name
 }
@@ -34,8 +39,15 @@ extension FileEntry {
         if url.pathExtension == "mov" {
             isVideo = true
         }
+        var entryType: FileEntryType = .image
+        if isDir.boolValue == true {
+            entryType = .directory
+        }
+        else if isVideo {
+            entryType = .video
+        }
         
-        return FileEntry(isDir: isDir.boolValue, isVideo: isVideo, fileURL: url, name: name)
+        return FileEntry(type: entryType, fileURL: url, name: name)
     }
 }
 
