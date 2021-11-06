@@ -24,7 +24,14 @@ class FilesystemManager {
             let name = item.lastPathComponent
             let isDir = item.hasDirectoryPath
             let isVideo = item.pathExtension.lowercased() == "mov"
-            let entry = FileEntry(isDir: isDir, isVideo: isVideo, fileURL: item, name: name)
+            var type = FileEntryType.image
+            if isDir {
+                type = .directory
+            }
+            else if isVideo {
+                type = .video
+            }
+            let entry = FileEntry(type: type, fileURL: item, name: name)
             entries.append(entry)
         }
         return entries
