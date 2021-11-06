@@ -16,7 +16,7 @@ class SingleEntryViewModel: ObservableObject {
         self.entry = entry
         self.coordinator = coordinator
         self.buttonAction = {}
-        if !entry.isDir {
+        if entry.type != .directory {
             buttonAction = toggleFavorite
         }
     }
