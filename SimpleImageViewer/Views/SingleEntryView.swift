@@ -11,7 +11,7 @@ struct SingleEntryView: View {
     @ObservedObject var viewModel: SingleEntryViewModel
     
     var body: some View {
-        if entry.isDir {
+        if entry.type == .directory {
             HStack {
                 Image(systemName: "folder")
                     .font(.largeTitle)
