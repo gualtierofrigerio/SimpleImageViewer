@@ -30,25 +30,24 @@ struct FilesView: View {
         ScrollView {
             LazyVStack(alignment: .leading) {
                 ForEach(viewModel.entries) { entry in
-                    if entry.isDir {
+                    switch entry.type {
+                    case .directory:
                         Button(action:{
                             selectDirectory(entry:entry)}) {
                                 SingleEntryView(viewModel: viewModel(forEntry: entry))
                             }.buttonStyle(PlainButtonStyle())
-                    }
-                    else if entry.isVideo {
+                    case .image:
                         Button(action: {
-                            coordinator.showVideo(atURL: entry.fileURL)
-                            videoActive = true
+                            coordinator.showImage(atURL: entry.fileURL)
+                            imageActive = true
                         }) {
                             SingleEntryView(viewModel: viewModel(forEntry: entry))
                                 .frame(width:nil, height:250)
                         }.buttonStyle(PlainButtonStyle())
-                    }
-                    else {
+                    case .video:
                         Button(action: {
-                            coordinator.showImage(atURL: entry.fileURL)
-                            imageActive = true
+                            coordinator.showVideo(atURL: entry.fileURL)
+                            videoActive = true
                         }) {
                             SingleEntryView(viewModel: viewModel(forEntry: entry))
                                 .frame(width:nil, height:250)
