@@ -48,7 +48,7 @@ class FilesViewModel: ObservableObject {
     
     private func getParentDir(ofDir dir:URL) -> FileEntry {
         let parentURL = dir.deletingLastPathComponent()
-        return FileEntry(isDir: true, fileURL: parentURL, name: "..")
+        return FileEntry(type: .directory, fileURL: parentURL, name: "..")
     }
     
     private func favoritesClosure(entry:FileEntry) -> FileEntry {
@@ -62,7 +62,7 @@ class FilesViewModel: ObservableObject {
     
     private func filterClosure(entry:FileEntry) -> Bool {
         var keep = false
-        if entry.isDir {
+        if entry.type == .directory {
             keep = true
         }
         let fileExtention = entry.fileURL.pathExtension.lowercased()
@@ -73,11 +73,11 @@ class FilesViewModel: ObservableObject {
     }
     
     private func sortClosure(lhs:FileEntry, rhs:FileEntry) -> Bool {
-        if lhs.isDir == rhs.isDir {
+        if lhs.type == rhs.type {
             return lhs.name.lowercased() < rhs.name.lowercased()
         }
         else {
-            return lhs.isDir
+            return lhs.type == .directory
         }
     }
 }
