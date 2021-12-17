@@ -11,7 +11,7 @@ import Combine
 /// View model for FilesView
 class FilesViewModel: ObservableObject {
     @Published var entries: [FileEntry] = []
-    var supportedExtensions = ["jpg", "png", "heic", "mov"]
+    var supportedExtensions = ["jpg", "jpeg", "png", "heic", "mov"]
     
     init(favoritesManager: FavoritesManager) {
         self.favoritesManager = favoritesManager
