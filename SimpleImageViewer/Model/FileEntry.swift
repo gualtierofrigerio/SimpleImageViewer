@@ -19,6 +19,7 @@ struct FileEntry {
     var isFavorite: Bool = false // true if is part of the user favorites
     var fileURL: URL // full path url string
     var name: String // file/directory name
+    var modificationDate: Date // file modification date
 }
 
 extension FileEntry {
@@ -46,8 +47,16 @@ extension FileEntry {
         else if isVideo {
             entryType = .video
         }
+        var modificationDate: Date?
+        if let attributes = try? fileManager.attributesOfItem(atPath: absolutePath) as [FileAttributeKey: Any],
+           let date = attributes[FileAttributeKey.modificationDate] as? Date {
+            modificationDate = date
+        }
         
-        return FileEntry(type: entryType, fileURL: url, name: name)
+        return FileEntry(type: entryType,
+                         fileURL: url,
+                         name: name,
+                         modificationDate: modificationDate ?? Date())
     }
 }
 
