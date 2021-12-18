@@ -31,7 +31,16 @@ class FilesystemManager {
             else if isVideo {
                 type = .video
             }
-            let entry = FileEntry(type: type, fileURL: item, name: name)
+            
+            var modificationDate: Date?
+            if let attributes = try? fileManager.attributesOfItem(atPath: item.path) as [FileAttributeKey: Any],
+               let date = attributes[FileAttributeKey.modificationDate] as? Date {
+                modificationDate = date
+            }
+            let entry = FileEntry(type: type,
+                                  fileURL: item,
+                                  name: name,
+                                  modificationDate: modificationDate ?? Date())
             entries.append(entry)
         }
         return entries
