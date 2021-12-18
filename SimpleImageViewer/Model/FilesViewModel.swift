@@ -8,9 +8,24 @@
 import Foundation
 import Combine
 
+enum FilesOrder {
+    case name
+    case modificationDate
+}
+
 /// View model for FilesView
 class FilesViewModel: ObservableObject {
     @Published var entries: [FileEntry] = []
+    @Published var orderBy: FilesOrder = .name {
+        didSet {
+            sortEntries()
+        }
+    }
+    @Published var orderAscending = true {
+        didSet {
+            sortEntries()
+        }
+    }
     var supportedExtensions = ["jpg", "jpeg", "png", "heic", "mov"]
     
     init(favoritesManager: FavoritesManager) {
@@ -48,7 +63,10 @@ class FilesViewModel: ObservableObject {
     
     private func getParentDir(ofDir dir:URL) -> FileEntry {
         let parentURL = dir.deletingLastPathComponent()
-        return FileEntry(type: .directory, fileURL: parentURL, name: "..")
+        return FileEntry(type: .directory,
+                         fileURL: parentURL,
+                         name: "..",
+                         modificationDate: Date())
     }
     
     private func favoritesClosure(entry:FileEntry) -> FileEntry {
@@ -73,11 +91,37 @@ class FilesViewModel: ObservableObject {
     }
     
     private func sortClosure(lhs:FileEntry, rhs:FileEntry) -> Bool {
-        if lhs.type == rhs.type {
-            return lhs.name.lowercased() < rhs.name.lowercased()
+        // internal function to sort two entries
+        func sortEntries(lhs:FileEntry, rhs:FileEntry) -> Bool {
+            if orderBy == .name {
+                if orderAscending {
+                    return lhs.name.lowercased() < rhs.name.lowercased()
+                }
+                else {
+                    return lhs.name.lowercased() > rhs.name.lowercased()
+                }
+            }
+            else {
+                if orderAscending {
+                    return lhs.modificationDate < rhs.modificationDate
+                }
+                else {
+                    return lhs.modificationDate > rhs.modificationDate
+                }
+            }
+        }
+        
+        if (lhs.type == rhs.type) ||
+            (lhs.type != .directory && rhs.type != .directory) {
+            return sortEntries(lhs: lhs, rhs: rhs)
         }
         else {
             return lhs.type == .directory
         }
+    }
+    
+    private func sortEntries() {
+        let sortedEntries = entries.sorted(by: sortClosure)
+        updateEntries(sortedEntries)
     }
 }
