@@ -18,6 +18,8 @@ struct FilesView: View {
         self.viewModel = coordinator.filesViewModel
     }
     
+    // MARK: - View
+    
     var body: some View {
         NavigationLink(destination: DetailImageView(viewModel: coordinator.detailImageViewModel),
                        isActive: $imageActive){}.hidden()
@@ -25,6 +27,9 @@ struct FilesView: View {
                        isActive: $videoActive){}.hidden()
         if noEntries {
             Text("Drag a folder here")
+        }
+        else {
+            sortingView
         }
         ScrollView {
             LazyVStack(alignment: .leading) {
@@ -36,21 +41,24 @@ struct FilesView: View {
         .onDrop(of: ["public.file-url"], delegate: self)
     }
     
-    // MARK: - Private
-    
-    private var coordinator: AppCoordinator
-    private var emptyAction: () -> Void = {} // used on dir entries as you don't need an action
-    
-    private var noEntries: Bool {
-        viewModel.entries.count == 0
-    }
-    
-    private func selectDirectory(entry: FileEntry) {
-        coordinator.setDirectory(entry.fileURL)
-    }
-    
-    private func toggleFavorite(_ entry: FileEntry) {
-        coordinator.toogleFavorite(forFileEntry: entry)
+    private var sortingView: some View {
+        HStack {
+            Picker(selection: $viewModel.orderBy, label: Text("Order by")) {
+                Text("File name").tag(FilesOrder.name)
+                Text("Modified date").tag(FilesOrder.modificationDate)
+            }.pickerStyle(.segmented)
+            Button(action:{
+                viewModel.orderAscending.toggle()
+            }
+            ) {
+                if viewModel.orderAscending {
+                    Image(systemName: "arrow.up")
+                }
+                else {
+                    Image(systemName: "arrow.down")
+                }
+            }.buttonStyle(PlainButtonStyle())
+        }
     }
     
     @ViewBuilder private func view(forEntry entry: FileEntry) -> some View {
@@ -77,6 +85,23 @@ struct FilesView: View {
                     .frame(width:nil, height:250)
             }.buttonStyle(PlainButtonStyle())
         }
+    }
+    
+    // MARK: - Private
+    
+    private var coordinator: AppCoordinator
+    private var emptyAction: () -> Void = {} // used on dir entries as you don't need an action
+    
+    private var noEntries: Bool {
+        viewModel.entries.count == 0
+    }
+    
+    private func selectDirectory(entry: FileEntry) {
+        coordinator.setDirectory(entry.fileURL)
+    }
+    
+    private func toggleFavorite(_ entry: FileEntry) {
+        coordinator.toogleFavorite(forFileEntry: entry)
     }
     
     private func viewModel(forEntry entry: FileEntry) -> SingleEntryViewModel {
