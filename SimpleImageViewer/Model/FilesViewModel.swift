@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 enum FilesOrder {
     case name
@@ -26,6 +27,9 @@ class FilesViewModel: ObservableObject {
             sortEntries()
         }
     }
+    var scrollViewProxy: ScrollViewProxy?
+    var scrollViewTopId: String = "_scroll_view_top_id_"
+    
     var supportedExtensions = ["jpg", "jpeg", "png", "heic", "mov"]
     
     init(favoritesManager: FavoritesManager) {
@@ -53,6 +57,7 @@ class FilesViewModel: ObservableObject {
     func updateEntries(_ entries:[FileEntry]) {
         DispatchQueue.main.async {
             self.entries = entries.map(self.favoritesClosure)
+            self.scrollViewProxy?.scrollTo(self.scrollViewTopId, anchor: .top)
         }
     }
     
