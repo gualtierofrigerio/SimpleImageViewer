@@ -12,7 +12,7 @@ struct FilesView: View {
     @State var alwaysActive = true
     @State var imageActive = false
     @State var videoActive = false
-    
+        
     init(coordinator:AppCoordinator) {
         self.coordinator = coordinator
         self.viewModel = coordinator.filesViewModel
@@ -31,10 +31,16 @@ struct FilesView: View {
         else {
             sortingView
         }
-        ScrollView {
-            LazyVStack(alignment: .leading) {
-                ForEach(viewModel.entries) { entry in
-                    view(forEntry: entry)
+        ScrollViewReader { proxy in
+            ExecuteClosure {
+                viewModel.scrollViewProxy = proxy
+            }
+            ScrollView {
+                EmptyView().id(viewModel.scrollViewTopId)
+                LazyVStack(alignment: .leading) {
+                    ForEach(viewModel.entries) { entry in
+                        view(forEntry: entry)
+                    }
                 }
             }
         }
